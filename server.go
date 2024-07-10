@@ -2,6 +2,7 @@ package main
 
 import (
 	"graphql/cmd/app/resolvers"
+	config "graphql/config"
 	"graphql/graph"
 	"log"
 	"net/http"
@@ -25,6 +26,8 @@ func main() {
 	if port == "" {
 		port = defaultPort
 	}
+
+	config.ConnectDB()
 
 	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: &resolvers.Resolver{}}))
 
